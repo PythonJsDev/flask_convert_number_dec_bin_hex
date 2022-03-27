@@ -1,0 +1,59 @@
+{% extends('base.html') %}
+{% block content %}
+<div class="container">
+    <p>bienvenue {{ current_user.email }}</p>
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row justify-content-md-center">
+            <legend class="row justify-content-md-center ">Convertion</legend>
+                <fieldset class="col col-lg-2 mb-3 bg-secondary text-white">
+                    {{ form.base.label }} {{ form.base(class="form-select mb-3") }}
+            
+                    <div class="mb-3">
+                        {{ form.data_to_convert.label }} 
+                        {% if form.data_to_convert.errors %}
+                            {{ form.data_to_convert(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.data_to_convert.errors %}
+                                    <span class="my-2 bg-white">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.data_to_convert(class="form-control") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+        </div>
+        <div class="text-center">
+            {{ form.submit(class="btn btn-secondary text-white") }}
+        </div>
+    </form>
+    
+        <hr>
+        <div class="row justify-content-center">
+            <legend class="row justify-content-md-center ">Historique</legend>
+            <div class="col-auto ">
+                <table class="text-center bg-secondary text-white table-bordered">
+                    <thead>
+                        <tr>
+                            <td class="px-2"> Décimale </td>
+                            <td class="px-2"> Binaire </td>
+                            <td class="px-2"> Hexadécimale </td>
+                        </tr>
+                    </thead>
+                    {% for data in datas %}
+                        <tr>
+                            <td>{{ data.value_dec }}</td>
+                            <td>{{ data.value_bin }}</td>
+                            <td>{{ data.value_hex }}</td>
+                        </tr>
+                    {% endfor %}
+                
+                </table>
+            </div>
+            <a class="text-center" href="{{ url_for('delete') }}">Effacer l'historique</a>
+        </div>
+        
+
+</div>
+{% endblock %}

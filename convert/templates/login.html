@@ -1,0 +1,29 @@
+{% extends('base.html') %}
+{% block content %}
+<div class="containt">
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="row justify-content-md-center">
+                <legend class="row justify-content-md-center ">Connexion</legend>
+                    <fieldset class="col col-lg-2 mb-3 bg-secondary text-white">
+                        <div class="my-2">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-control") }}
+                        </div>
+                    </fieldset>        
+            </div>
+            <div class="text-center">
+                {{ form.submit(class="btn btn-secondary text-white") }}
+            </div>
+        </form>
+        <div class="text-center pt-3">
+            <small class="border-top border-secondary text-muted">Vous n'avez pas de compte ? <a href="{{ url_for('register') }}">S'inscrire</a></small>
+        </div>
+        
+</div>
+
+{% endblock %}
